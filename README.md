@@ -16,3 +16,7 @@ Ensure the current project is the latest version.
 cd geobus
 git pull
 ```
+Serve the project
+```
+sudo start shiny-server
+```
