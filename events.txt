@@ -1,3 +1,4 @@
 - Initilaise repository
-- Create remote linux host instance 
+- Create remote linux (ubuntu) host instance 
 - Install R in cloud VM
+- Install Shiny Server in cloud VM

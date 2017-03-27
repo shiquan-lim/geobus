@@ -6,3 +6,8 @@ Open a terminal shell and connect to the remote instance via
 ```
 ssh -i geobushostinstance.pem ubuntu@ec2-54-179-162-24.ap-southeast-1.compute.amazonaws.com
 ```
+Then go to the home directory on the server machine
+
+```
+cd /home/ubuntu
+```
