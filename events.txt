@@ -1,0 +1,3 @@
+- Initilaise repository
+- Create remote linux host instance 
+- Install R in cloud VM
