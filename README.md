@@ -11,3 +11,8 @@ Then go to the home directory on the server machine
 ```
 cd /home/ubuntu
 ```
+Ensure the current project is the latest version.
+```
+cd geobus
+git pull
+```
