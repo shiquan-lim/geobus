@@ -9,7 +9,7 @@ ssh -i geobushostinstance.pem ubuntu@ec2-54-179-162-24.ap-southeast-1.compute.am
 Then go to the home directory on the server machine
 
 ```
-cd /home/ubuntu
+cd /srv/shiny-server
 ```
 Ensure the current project is the latest version.
 ```

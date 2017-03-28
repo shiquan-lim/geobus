@@ -4,6 +4,9 @@
 - Install Shiny Server in cloud VM
 - Install git in on cloud VM
 - Clone project into cloud VM
+- Install RStudio server in cloud VM
 
 ***
 Serve location -> http://54.179.162.24:3838/
+RStudio -> 54.179.162.24:8787
+***
