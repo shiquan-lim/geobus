@@ -1,22 +1,22 @@
 library(shiny)
+library(shinyTime)
 
 # Define UI for application that plots random distributions 
-shinyUI(pageWithSidebar(
+shinyUI(fluidPage(
   
   # Application title
-  headerPanel("Hello Shiny!"),
-  
-  # Sidebar with a slider input for number of observations
-  sidebarPanel(
-    sliderInput("obs", 
-                "Number of observations:", 
-                min = 1,
-                max = 1000, 
-                value = 500)
+  titlePanel("Geobus analytic application beta 1.0"),
+  fluidRow(
+    column(12,
+           plotOutput("heatPlot")
+    )
   ),
-  
-  # Show a plot of the generated distribution
-  mainPanel(
-    plotOutput("heatPlot")
+  fluidRow(
+    column(5, 
+           dateInput("date", 
+                     label = h3("Date input"), 
+                     value = "2016-02-15"),
+           timeInput("timewin", "Time:", value = strptime("12:34:56", "%T"))
+           )
   )
 ))
