@@ -28,4 +28,15 @@ Dynamic allocation model based on time of day\
 Procedure:\
 - City_nation_ride data contains in excess of a million entries from 15 feb 16 to 21 feb 16, while only a week\'92s worth of data, it is still substantial and may cause issues with the model during testing. As such, we extract a single day\'92s data - 15/2/16 for our testing. (144240 lines)\
 - Also, there are numerous rows with faulty columns (4,7,8). (ASSUME? negligible amount. Delete these lines)\
+- Need to convert bus stop unique 5 digit. Download SHP bus stop data from LTA data mall. Open SHP file in GQIS. Add attributes $x and $y to data points. Export attribute table as CSV. \
+- Download road network shp file. \
+- Create server.R and ui.R files for shiny application. outline and bus stop location data into the model.\
+-Certain bus codes do not map to any particular XY coords as of the 2016 catalogs. Possibly these stops were / are under construction. We remove these entries. Subsequent entries from the transportation data that correspond to these missing entries will also be removed. This current number seems sufficiently small as to be negligible to the accuracy of the model\
+- Transform tito data to csv. Load into model\
+-Allow R shiny UI widget selection of date and time\
+\
+\
+\
+\
+\
 }
