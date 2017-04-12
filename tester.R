@@ -20,7 +20,7 @@ busstopsppp <- ppp(busstopscsv[,1], busstopscsv[,2], window = sgowin)
 busstopsppp <- ppp(busstopscsv[,1], busstopscsv[,2], window = sgowin, marks = busstopscsv[,6])
 plot(busstopsppp)
 
-fil = filter(titosamplecsv, 000000 < as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) & as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) < 235910)
+fil = filter(titosamplecsv, 230000 < as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) & as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) < 235910)
 
 #busstopscsv$timeden <- sapply(busstopscsv$BUS_STOP_N, FUN=function(x) length(fil1[fil1$BOARDING_STOP_STN==x, "BOARDING_STOP_STN"]))
 
@@ -39,4 +39,4 @@ fil$lat <- converted$x
 
 overlay <- stat_density2d(aes(x= lat, y = long, fill = ..level.., alpha = ..level..), bins = 10, geom = "polygon", data = fil)
 #overlay <- geom_point(data=busstopscsv, aes(x=lat,y=long,size=timeden), alpha = 0.3, size = 0.1)
-sgmap + overlay
+sgmap + overlay  + scale_fill_gradient(low = "black", high = "red") + ggtitle("Human density at bus stops")
