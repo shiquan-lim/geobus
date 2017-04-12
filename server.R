@@ -45,10 +45,10 @@ shinyServer(function(input, output) {
     
     #create overlay layer
     overlay <- stat_density2d(aes(x= lat, y = long, fill = ..level.., alpha = ..level..), bins = 10, geom = "polygon", data = fil)
-    sgmap + overlay  + scale_fill_gradient(low = "black", high = "red") + ggtitle("Human density at bus stops")  + inset(grob = ggplotGrob(ggplot() + overlay + theme_inset()), xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf)
+    sgmap + overlay  + scale_fill_gradient(low = "black", high = "red") + ggtitle("Human density at bus stops")
   })
   
-  output$serviceden <- renderPlot({
+  output$serviceDen <- renderPlot({
     #busstopsppp <- ppp(busstopscsv[,1], busstopscsv[,2], window = sgowin, marks = busstopscsv[,6])
     busstopsppp <- ppp(busstopscsv[,1], busstopscsv[,2], window = sgowin)
     plot(busstopsppp)

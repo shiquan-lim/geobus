@@ -9,9 +9,11 @@ shinyUI(fluidPage(
   fluidRow(
     column(2,
            radioButtons("analtype", label = h3("Select Analysis"), choices = list("Human density at bus stops" = 1, "Under-serviced bus stops" = 2), selected = 1)),
-    column(10,
+    column(5,
            plotOutput("heatPlot")
-    )
+    ),
+    column(5,
+           plotOutput("serviceDen"))
   ),
   fluidRow(
     column(5, 
