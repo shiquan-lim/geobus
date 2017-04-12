@@ -15,7 +15,7 @@ shinyServer(function(input, output) {
   sgosm <- get_map("singapore", zoom = 11)
   sgmap <- ggmap(sgosm, extent = "device")
   busstopscsv <- read.csv("./data/coded_stops.csv")
-  titosamplecsv <- read.csv("./data/bus_sample.csv")
+  titosamplecsv <- read.csv("./data/City_Nation_Ride_Data.csv")
   
   #set xy -> latlong conversion string
   proj4string <- "+proj=tmerc +lat_0=1.366666666666667 +lon_0=103.8333333333333 +k=1 +x_0=28001.642 +y_0=38744.572 +datum=WGS84 +units=m +no_defs"
@@ -31,7 +31,7 @@ shinyServer(function(input, output) {
     #filter tito rows by time input
     timewin = strftime(input$timewin, format="%H:%M:%OS")
     fil = filter(titosamplecsv, as.numeric(gsub("[: -]", "" , timewin, perl=TRUE))-(input$obswindow*60) < as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) & as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) < as.numeric(gsub("[: -]", "" , timewin, perl=TRUE)))
-    #fil = titosamplecsv
+    fil = filter(fil, ACTUAL_SRVC_NUMBER == input$svcnum)
     #assosciate each bus stop to a density value at the particular time window
     #busstopscsv$timeden <- sapply(busstopscsv$BUS_STOP_N, FUN=function(x) length(fil[fil$BOARDING_STOP_STN==x, "BOARDING_STOP_STN"]))
     fil$x <- busstopscsv$X[match(fil$BOARDING_STOP_STN, busstopscsv$BUS_STOP_N)]
@@ -49,8 +49,17 @@ shinyServer(function(input, output) {
   })
   
   output$serviceDen <- renderPlot({
-    #busstopsppp <- ppp(busstopscsv[,1], busstopscsv[,2], window = sgowin, marks = busstopscsv[,6])
-    busstopsppp <- ppp(busstopscsv[,1], busstopscsv[,2], window = sgowin)
-    plot(busstopsppp)
+    timewin = strftime(input$timewin, format="%H:%M:%OS")
+    fil2 = filter(titosamplecsv, as.numeric(gsub("[: -]", "" , timewin, perl=TRUE))-(input$obswindow*60) < as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) & as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) < as.numeric(gsub("[: -]", "" , timewin, perl=TRUE)))
+    fil2 = filter(fil2, ACTUAL_SRVC_NUMBER == input$svcnum)
+    fil2$bwin <- substring(fil2$RIDE_START_TIME, 1, 5)
+    fil2 <- fil2[!duplicated(fil2$bwin),]
+    
+    fil2$x <- busstopscsv$X[match(fil2$BOARDING_STOP_STN, busstopscsv$BUS_STOP_N)]
+    fil2$y <- busstopscsv$Y[match(fil2$BOARDING_STOP_STN, busstopscsv$BUS_STOP_N)]
+    
+    stopfreqppp <- ppp(fil2[,10], fil2[,11], window = sgowin)
+    
+    plot(quadratcount(stopfreqppp, 12))
   })
 })

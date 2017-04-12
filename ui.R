@@ -7,23 +7,20 @@ shinyUI(fluidPage(
   # Application title
   titlePanel("Geobus analytic application beta 1.0"),
   fluidRow(
-    column(2,
-           radioButtons("analtype", label = h3("Select Analysis"), choices = list("Human density at bus stops" = 1, "Under-serviced bus stops" = 2), selected = 1)),
-    column(5,
+    column(6,
            plotOutput("heatPlot")
     ),
-    column(5,
+    column(6,
            plotOutput("serviceDen"))
   ),
   fluidRow(
     column(5, 
-           dateInput("date", 
-                     label = h3("Date input"), 
-                     value = "2016-02-15"),
-           timeInput("timewin", "Time:", value = strptime("13:34:56", "%T"))
+           textInput("svcnum", label = h3("Select bus number"), 
+                     value = "166"),
+           timeInput("timewin", "Time:", value = strptime("18:30:00", "%T"))
            ),
     column(4,
-           sliderInput("obswindow", label = h3("Obervsation Window (minutes)"),
-                       min = 1, max = 60, value = 10))
+           sliderInput("obswindow", label = h3("Observation Window (minutes)"),
+                       min = 1, max = 60, value = 15))
   )
 ))
