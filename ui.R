@@ -5,7 +5,7 @@ library(shinyTime)
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Geobus analytic application beta 1.0"),
+  titlePanel("Geobus analytic application beta 2.0"),
   fluidRow(
     column(6,
            plotOutput("heatPlot")
