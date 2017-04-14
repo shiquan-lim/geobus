@@ -21,6 +21,6 @@ shinyUI(fluidPage(
            ),
     column(4,
            sliderInput("obswindow", label = h3("Observation Window (minutes)"),
-                       min = 1, max = 60, value = 15))
+                       min = 1, max = 60, value = 60))
   )
 ))
