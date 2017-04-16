@@ -7,10 +7,10 @@ shinyUI(fluidPage(
   # Application title
   titlePanel("Geobus analytic application beta 2.0"),
   fluidRow(
-    column(6,
+    column(8,
            plotOutput("heatPlot")
     ),
-    column(6,
+    column(4,
            plotOutput("serviceDen"))
   ),
   fluidRow(

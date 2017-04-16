@@ -13,7 +13,7 @@ shinyServer(function(input, output) {
   # Import data into the model
   sgowin <- as.owin(readOGR(dsn = './data/outline', layer = "MP14_PLNG_AREA_WEB_PL"))
   sgosm <- get_map("singapore", zoom = 11)
-  sgmap <- ggmap(sgosm, extent = "device")
+  sgmap <- ggmap(sgosm, extent = "device") + scale_y_continuous(limits=c(1.24, 1.465)) + scale_x_continuous(limits = c(103.6, 104.05))
   busstopscsv <- read.csv("./data/coded_stops.csv")
   titosamplecsv <- read.csv("./data/City_Nation_Ride_Data.csv")
   

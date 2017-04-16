@@ -20,3 +20,7 @@ stopfreqppp <- ppp(fil2[,10], fil2[,11], window = sgowin)
 plot(quadratcount(stopfreqppp))
 fitx = kppm(stopfreqppp)
 plot(quadrat.test(stopfreqppp, fit=fitx))
+
+sgosm <- get_map("singapore", source = "osm", zoom = 11)
+sgmap <- ggmap(sgosm) + scale_y_continuous(limits=c(1.24, 1.465)) + scale_x_continuous(limits = c(103.6, 104.05))
+print(sgmap)
