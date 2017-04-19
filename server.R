@@ -29,8 +29,9 @@ shinyServer(function(input, output) {
   #
   output$heatPlot <- renderPlot({
     #filter tito rows by time input
-    timewin = strftime(input$timewin, format="%H:%M:%OS")
-    fil = filter(titosamplecsv, as.numeric(gsub("[: -]", "" , timewin, perl=TRUE))-(input$obswindow*60) < as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) & as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) < as.numeric(gsub("[: -]", "" , timewin, perl=TRUE)))
+    timewin = strftime(input$timewin - input$obswindow * 60, format="%H:%M:%OS")
+    endtime = strftime(input$timewin, format="%H:%M:%OS")
+    fil = filter(titosamplecsv, as.numeric(gsub("[: -]", "" , timewin, perl=TRUE)) <= as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) & as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) <= as.numeric(gsub("[: -]", "" , endtime, perl=TRUE)))
     fil = filter(fil, ACTUAL_SRVC_NUMBER == input$svcnum)
     #assosciate each bus stop to a density value at the particular time window
     #busstopscsv$timeden <- sapply(busstopscsv$BUS_STOP_N, FUN=function(x) length(fil[fil$BOARDING_STOP_STN==x, "BOARDING_STOP_STN"]))
@@ -49,8 +50,9 @@ shinyServer(function(input, output) {
   })
   
   output$serviceDen <- renderPlot({
-    timewin = strftime(input$timewin, format="%H:%M:%OS")
-    fil2 = filter(titosamplecsv, as.numeric(gsub("[: -]", "" , timewin, perl=TRUE))-(input$obswindow*60) < as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) & as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) < as.numeric(gsub("[: -]", "" , timewin, perl=TRUE)))
+    timewin = strftime(input$timewin - input$obswindow * 60, format="%H:%M:%OS")
+    endtime = strftime(input$timewin, format="%H:%M:%OS")
+    fil2 = filter(titosamplecsv, as.numeric(gsub("[: -]", "" , timewin, perl=TRUE)) <= as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) & as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) <= as.numeric(gsub("[: -]", "" , endtime, perl=TRUE)))
     fil2 = filter(fil2, ACTUAL_SRVC_NUMBER == input$svcnum)
     fil2$bwin <- substring(fil2$RIDE_START_TIME, 1, 5)
     fil2 <- fil2[!duplicated(fil2$bwin),]

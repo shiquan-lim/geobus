@@ -14,13 +14,14 @@ sgowin <- as.owin(readOGR(dsn = './data/outline', layer = "MP14_PLNG_AREA_WEB_PL
 busstopscsv <- read.csv("./data/coded_stops.csv")
 titosamplecsv <- read.csv("./data/bus_sample.csv")
 sgosm <- get_map("singapore", zoom = 11)
-sgmap <- ggmap(sgosm, extent = "device", legend = "topleft")
+sgmap <- ggmap(sgosm, extent = "device", legend = "topleft") 
 
 busstopsppp <- ppp(busstopscsv[,1], busstopscsv[,2], window = sgowin)
 busstopsppp <- ppp(busstopscsv[,1], busstopscsv[,2], window = sgowin, marks = busstopscsv[,6])
 plot(busstopsppp)
 
-fil = filter(titosamplecsv, 230000 < as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) & as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) < 235910)
+fil = filter(titosamplecsv, 180000 < as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) & as.numeric(gsub("[: -]", "" , RIDE_START_TIME, perl=TRUE)) < 185910)
+fil = filter(fil, ACTUAL_SRVC_NUMBER == 166)
 
 #busstopscsv$timeden <- sapply(busstopscsv$BUS_STOP_N, FUN=function(x) length(fil1[fil1$BOARDING_STOP_STN==x, "BOARDING_STOP_STN"]))
 
